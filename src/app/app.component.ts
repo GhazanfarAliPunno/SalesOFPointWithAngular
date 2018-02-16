@@ -22,6 +22,7 @@ export class AppComponent {
   srNumber: number = 1;
   totalItemPrice: number;
   netPrice: number = 0;
+  qty:string;
 
   startValueOfDropDown: string = 'Select Items'
   stockCalculation: stockList[] = [];
@@ -36,41 +37,32 @@ export class AppComponent {
   ];
 
   onDropdownChange(dropValue: Event) {
-    console.log(dropValue);
-  
+    
+
     this.index = (<HTMLSelectElement>dropValue.target).selectedIndex;
-    console.log(this.index);
-    if(this.index==0)
-    {
+    
+    if (this.index == 0) {
       alert("Please select valid item");
     }
-    else{
-      this.currentSelectedItem = this.itemsList[this.index-1];
-      
+    else {
+      this.currentSelectedItem = this.itemsList[this.index - 1];
       this.itmName = this.currentSelectedItem.itemName;
       this.itmPrice = this.currentSelectedItem.itemPrice;
     }
-    
-    
-   
-   
-
   }
 
   addItemsDetails(even: Event) {
 
-    if (this.index>=1)
-    {
     this.totalItemPrice = this.itmPrice * this.quantity;
     this.netPrice = this.netPrice + this.totalItemPrice;
     console.log(this.stockCalculation);
+    console.log(even);
+    console.log(this.srNumber);
+  
     this.stockCalculation.push(new stockList(this.srNumber, this.itmName, this.itmPrice, this.quantity, this.netPrice));
+    console.log(this.stockCalculation);
     this.srNumber = this.srNumber + 1;
     this.totalItemPrice = 0;
-    }
-    else{
-      alert("Please Select valid Item")
-    }
 
   }
 }
